@@ -1,21 +1,32 @@
-import AppBreadcrumb from './AppBreadcrumb'
-import AppContent from './AppContent'
-import AppFooter from './AppFooter'
-import AppHeader from './AppHeader'
-import AppHeaderDropdown from './header/AppHeaderDropdown'
-import AppSidebar from './AppSidebar'
-import DocsCallout from './DocsCallout'
-import DocsLink from './DocsLink'
-import DocsExample from './DocsExample'
+import { combineReducers } from 'redux'
+import authReducer from './authReducer'
+import sliderReducer from './sliderReducer'
+import categoryReducer from './categoryReducer'
+import subCategoryReducer from './subCategoryReducer'
+import brandReducer from './brandReducer'
+import productReducer from './productReducer'
+import orderReducer from './orderReducer'
+import settingsReducer from './settingsReducer'
+import userReducer from './userReducer'
+import dashboardReducer from './dashboardReducer'
+const appReducer = combineReducers({
+  user: authReducer,
+  sliderReducer,
+  categoryReducer,
+  subCategoryReducer,
+  brandReducer,
+  productReducer,
+  orderReducer,
+  settingsReducer,
+  userReducer,
+  dashboardReducer,
+})
 
-export {
-  AppBreadcrumb,
-  AppContent,
-  AppFooter,
-  AppHeader,
-  AppHeaderDropdown,
-  AppSidebar,
-  DocsCallout,
-  DocsLink,
-  DocsExample,
+const rootReducer = (state, action) => {
+  if (action.type === 'LOGOUT_USER') {
+    state = undefined
+  }
+  return appReducer(state, action)
 }
+
+export default rootReducer
